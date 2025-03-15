@@ -62,7 +62,7 @@
     <div class="error" id="bloodPressureError"></div>
 
     <!-- Family Diseases Input -->
-    <label>Family Diseases:</label>
+    <label>Family Diseases (optional):</label>
     <label><input type="checkbox" name="familyDiseases" value="diabetes"> Diabetes</label>
     <label><input type="checkbox" name="familyDiseases" value="cancer"> Cancer</label>
     <label><input type="checkbox" name="familyDiseases" value="alzheimers"> Alzheimer’s</label>
@@ -93,8 +93,8 @@
       // Validate Height
       const height = document.getElementById('height').value;
       const heightError = document.getElementById('heightError');
-      if (!height || height < 0) {
-        heightError.textContent = 'Please enter a valid height (positive number).';
+      if (!height || height <= 60) {
+        heightError.textContent = 'Please enter a valid height (greater than 60 cm).';
         document.getElementById('height').classList.add('invalid');
         isValid = false;
       } else {
@@ -126,15 +126,7 @@
         document.getElementById('bloodPressure').classList.remove('invalid');
       }
 
-      // Validate Family Diseases (at least one checkbox must be selected)
-      const familyDiseases = document.querySelectorAll('input[name="familyDiseases"]:checked');
-      const familyDiseasesError = document.getElementById('familyDiseasesError');
-      if (familyDiseases.length === 0) {
-        familyDiseasesError.textContent = 'Please select at least one family disease.';
-        isValid = false;
-      } else {
-        familyDiseasesError.textContent = '';
-      }
+      // Family Diseases is now optional, so no validation is needed
 
       return isValid;
     }
