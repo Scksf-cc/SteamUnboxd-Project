@@ -3,21 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
   <title>Insurance Risk Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, select {
+      margin-bottom: 10px;
+      padding: 5px;
+      width: 200px;
+    }
+    .error {
+      color: red;
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+    .invalid {
+      border: 2px solid red;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
   <h1>Insurance Risk Calculator</h1>
   <form id="riskForm">
+    <!-- Age Input -->
     <label for="age">Age:</label>
     <input type="number" id="age" name="age" required>
+    <div class="error" id="ageError"></div>
 
+    <!-- Height Input -->
     <label for="height">Height (in cm):</label>
     <input type="number" id="height" name="height" required>
+    <div class="error" id="heightError"></div>
 
+    <!-- Weight Input -->
     <label for="weight">Weight (in kg):</label>
     <input type="number" id="weight" name="weight" required>
+    <div class="error" id="weightError"></div>
 
+    <!-- Blood Pressure Input -->
     <label for="bloodPressure">Blood Pressure:</label>
     <select id="bloodPressure" name="bloodPressure" required>
       <option value="normal">Normal</option>
@@ -26,11 +59,14 @@
       <option value="stage2">Stage 2</option>
       <option value="crisis">Crisis</option>
     </select>
+    <div class="error" id="bloodPressureError"></div>
 
+    <!-- Family Diseases Input -->
     <label>Family Diseases:</label>
     <label><input type="checkbox" name="familyDiseases" value="diabetes"> Diabetes</label>
     <label><input type="checkbox" name="familyDiseases" value="cancer"> Cancer</label>
     <label><input type="checkbox" name="familyDiseases" value="alzheimers"> Alzheimer’s</label>
+    <div class="error" id="familyDiseasesError"></div>
 
     <button type="submit">Calculate Risk</button>
   </form>
@@ -38,8 +74,78 @@
   <div class="result" id="result"></div>
 
   <script>
+    // Function to validate input fields
+    function validateInputs() {
+      let isValid = true;
+
+      // Validate Age
+      const age = document.getElementById('age').value;
+      const ageError = document.getElementById('ageError');
+      if (!age || age < 0) {
+        ageError.textContent = 'Please enter a valid age (positive number).';
+        document.getElementById('age').classList.add('invalid');
+        isValid = false;
+      } else {
+        ageError.textContent = '';
+        document.getElementById('age').classList.remove('invalid');
+      }
+
+      // Validate Height
+      const height = document.getElementById('height').value;
+      const heightError = document.getElementById('heightError');
+      if (!height || height < 0) {
+        heightError.textContent = 'Please enter a valid height (positive number).';
+        document.getElementById('height').classList.add('invalid');
+        isValid = false;
+      } else {
+        heightError.textContent = '';
+        document.getElementById('height').classList.remove('invalid');
+      }
+
+      // Validate Weight
+      const weight = document.getElementById('weight').value;
+      const weightError = document.getElementById('weightError');
+      if (!weight || weight < 0) {
+        weightError.textContent = 'Please enter a valid weight (positive number).';
+        document.getElementById('weight').classList.add('invalid');
+        isValid = false;
+      } else {
+        weightError.textContent = '';
+        document.getElementById('weight').classList.remove('invalid');
+      }
+
+      // Validate Blood Pressure
+      const bloodPressure = document.getElementById('bloodPressure').value;
+      const bloodPressureError = document.getElementById('bloodPressureError');
+      if (!bloodPressure) {
+        bloodPressureError.textContent = 'Please select a blood pressure level.';
+        document.getElementById('bloodPressure').classList.add('invalid');
+        isValid = false;
+      } else {
+        bloodPressureError.textContent = '';
+        document.getElementById('bloodPressure').classList.remove('invalid');
+      }
+
+      // Validate Family Diseases (at least one checkbox must be selected)
+      const familyDiseases = document.querySelectorAll('input[name="familyDiseases"]:checked');
+      const familyDiseasesError = document.getElementById('familyDiseasesError');
+      if (familyDiseases.length === 0) {
+        familyDiseasesError.textContent = 'Please select at least one family disease.';
+        isValid = false;
+      } else {
+        familyDiseasesError.textContent = '';
+      }
+
+      return isValid;
+    }
+
+    // Form submission handler
     document.getElementById('riskForm').addEventListener('submit', async (event) => {
       event.preventDefault();
+
+      if (!validateInputs()) {
+        return; // Stop submission if validation fails
+      }
 
       const age = document.getElementById('age').value;
       const height = document.getElementById('height').value;
