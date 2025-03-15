@@ -3,75 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Insurance Risk Calculator</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    label {
-      display: block;
-      margin-top: 10px;
-    }
-    input, select {
-      margin-bottom: 10px;
-      padding: 5px;
-      width: 200px;
-    }
-    .error {
-      color: red;
-      font-size: 0.9em;
-      margin-top: 5px;
-    }
-    .invalid {
-      border: 2px solid red;
-    }
-    .result {
-      margin-top: 20px;
-      font-weight: bold;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
+  <title>Insurance Healthcare Risk Calculator</title>
 </head>
 <body>
-  <h1>Insurance Risk Calculator</h1>
-  <form id="riskForm">
-    <!-- Age Input -->
-    <label for="age">Age:</label>
-    <input type="number" id="age" name="age" required>
-    <div class="error" id="ageError"></div>
+  <!-- Part 1: Title and Description -->
+  <header>
+    <h1>Insurance Healthcare Risk Calculator</h1>
+    <p>
+      Welcome to the Insurance Healthcare Risk Calculator! Enter your age, height, weight, blood pressure level, and any family diseases to calculate your insurance risk score and category.
+    </p>
+  </header>
 
-    <!-- Height Input -->
-    <label for="height">Height (in cm):</label>
-    <input type="number" id="height" name="height" required>
-    <div class="error" id="heightError"></div>
+  <!-- Part 2: Calculator Form -->
+  <main>
+    <div class="calculator-container">
+      <form id="riskForm">
+        <!-- Age Input -->
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
+        <div class="error" id="ageError"></div>
 
-    <!-- Weight Input -->
-    <label for="weight">Weight (in kg):</label>
-    <input type="number" id="weight" name="weight" required>
-    <div class="error" id="weightError"></div>
+        <!-- Height Input -->
+        <label for="height">Height (in cm):</label>
+        <input type="number" id="height" name="height" required>
+        <div class="error" id="heightError"></div>
 
-    <!-- Blood Pressure Input -->
-    <label for="bloodPressure">Blood Pressure:</label>
-    <select id="bloodPressure" name="bloodPressure" required>
-      <option value="normal">Normal</option>
-      <option value="elevated">Elevated</option>
-      <option value="stage1">Stage 1</option>
-      <option value="stage2">Stage 2</option>
-      <option value="crisis">Crisis</option>
-    </select>
-    <div class="error" id="bloodPressureError"></div>
+        <!-- Weight Input -->
+        <label for="weight">Weight (in kg):</label>
+        <input type="number" id="weight" name="weight" required>
+        <div class="error" id="weightError"></div>
 
-    <!-- Family Diseases Input -->
-    <label>Family Diseases (optional):</label>
-    <label><input type="checkbox" name="familyDiseases" value="diabetes"> Diabetes</label>
-    <label><input type="checkbox" name="familyDiseases" value="cancer"> Cancer</label>
-    <label><input type="checkbox" name="familyDiseases" value="alzheimers"> Alzheimer’s</label>
-    <div class="error" id="familyDiseasesError"></div>
+        <!-- Blood Pressure Input -->
+        <label for="bloodPressure">Blood Pressure:</label>
+        <select id="bloodPressure" name="bloodPressure" required>
+          <option value="normal">Normal</option>
+          <option value="elevated">Elevated</option>
+          <option value="stage1">Stage 1</option>
+          <option value="stage2">Stage 2</option>
+          <option value="crisis">Crisis</option>
+        </select>
+        <div class="error" id="bloodPressureError"></div>
 
-    <button type="submit">Calculate Risk</button>
-  </form>
+        <!-- Family Diseases Input -->
+        <label>Family Diseases (optional):</label>
+        <label><input type="checkbox" name="familyDiseases" value="diabetes"> Diabetes</label>
+        <label><input type="checkbox" name="familyDiseases" value="cancer"> Cancer</label>
+        <label><input type="checkbox" name="familyDiseases" value="alzheimers"> Alzheimer’s</label>
+        <div class="error" id="familyDiseasesError"></div>
 
-  <div class="result" id="result"></div>
+        <button type="submit">Calculate Risk</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Part 3: Results and Calculations -->
+  <section class="results-container">
+    <h2>Results</h2>
+    <div id="inputValues">
+      <p><strong>Input Values:</strong></p>
+      <ul>
+        <li>Age: <span id="displayAge"></span></li>
+        <li>Height: <span id="displayHeight"></span> cm</li>
+        <li>Weight: <span id="displayWeight"></span> kg</li>
+        <li>Blood Pressure: <span id="displayBloodPressure"></span></li>
+        <li>Family Diseases: <span id="displayFamilyDiseases"></span></li>
+      </ul>
+    </div>
+    <div id="calculations">
+      <p><strong>Calculations:</strong></p>
+      <ul>
+        <li>BMI: <span id="displayBMI"></span></li>
+        <li>Age Points: <span id="displayAgePoints"></span></li>
+        <li>BMI Points: <span id="displayBMIPoints"></span></li>
+        <li>Blood Pressure Points: <span id="displayBloodPressurePoints"></span></li>
+        <li>Family Disease Points: <span id="displayFamilyDiseasePoints"></span></li>
+      </ul>
+    </div>
+    <div id="results">
+      <p><strong>Total Risk Score:</strong> <span id="displayTotalScore"></span></p>
+      <p><strong>Risk Category:</strong> <span id="displayRiskCategory"></span></p>
+    </div>
+  </section>
 
   <script>
     // Function to validate input fields
@@ -126,8 +139,6 @@
         document.getElementById('bloodPressure').classList.remove('invalid');
       }
 
-      // Family Diseases is now optional, so no validation is needed
-
       return isValid;
     }
 
@@ -146,6 +157,14 @@
       const familyDiseases = Array.from(document.querySelectorAll('input[name="familyDiseases"]:checked'))
         .map(checkbox => checkbox.value);
 
+      // Display input values
+      document.getElementById('displayAge').textContent = age;
+      document.getElementById('displayHeight').textContent = height;
+      document.getElementById('displayWeight').textContent = weight;
+      document.getElementById('displayBloodPressure').textContent = bloodPressure;
+      document.getElementById('displayFamilyDiseases').textContent = familyDiseases.join(', ') || 'None';
+
+      // Send data to the API
       const response = await fetch('/api/message', {
         method: 'POST',
         headers: {
@@ -155,7 +174,15 @@
       });
 
       const result = await response.json();
-      document.getElementById('result').textContent = `Risk Score: ${result.score}, Risk Category: ${result.category}`;
+
+      // Display calculations and results
+      document.getElementById('displayBMI').textContent = result.bmi;
+      document.getElementById('displayAgePoints').textContent = result.agePoints;
+      document.getElementById('displayBMIPoints').textContent = result.bmiPoints;
+      document.getElementById('displayBloodPressurePoints').textContent = result.bloodPressurePoints;
+      document.getElementById('displayFamilyDiseasePoints').textContent = result.familyDiseasePoints;
+      document.getElementById('displayTotalScore').textContent = result.score;
+      document.getElementById('displayRiskCategory').textContent = result.category;
     });
   </script>
 </body>
