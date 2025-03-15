@@ -23,7 +23,7 @@
     (
       async function()
       {
-        const {text} = await(await fetch(`/api/mesage`)).json();
+        const {text} = await(await fetch(`/api/message`)).json();
         document.querySelector('#name').textContent = text;
       }()
     );
