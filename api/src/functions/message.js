@@ -26,20 +26,20 @@ app.http('message', {
     else bmiPoints = 75;
 
     // Calculate points for blood pressure
-    let bpPoints = 0;
+    let bloodPressurePoints = 0;
     switch (bloodPressure) {
-      case 'normal': bpPoints = 0; break;
-      case 'elevated': bpPoints = 15; break;
-      case 'stage1': bpPoints = 30; break;
-      case 'stage2': bpPoints = 75; break;
-      case 'crisis': bpPoints = 100; break;
+      case 'normal': bloodPressurePoints = 0; break;
+      case 'elevated': bloodPressurePoints = 15; break;
+      case 'stage1': bloodPressurePoints = 30; break;
+      case 'stage2': bloodPressurePoints = 75; break;
+      case 'crisis': bloodPressurePoints = 100; break;
     }
 
     // Calculate points for family diseases
     const familyDiseasePoints = familyDiseases.length * 10;
 
     // Calculate total score
-    const totalScore = agePoints + bmiPoints + bpPoints + familyDiseasePoints;
+    const totalScore = agePoints + bmiPoints + bloodPressurePoints + familyDiseasePoints;
 
     // Determine risk category
     let riskCategory = '';
@@ -48,8 +48,14 @@ app.http('message', {
     else if (totalScore <= 75) riskCategory = 'High Risk';
     else riskCategory = 'Uninsurable';
 
+    // Return all calculations and results
     return {
       body: JSON.stringify({
+        bmi,
+        agePoints,
+        bmiPoints,
+        bloodPressurePoints,
+        familyDiseasePoints,
         score: totalScore,
         category: riskCategory,
       }),
