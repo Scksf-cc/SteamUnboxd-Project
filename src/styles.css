@@ -1,108 +1,218 @@
-/* General Styles */
+/* POPPINS FONT */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+*{  
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+/* Allow scrolling */
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f9;
-  color: #333;
+    background: rgb(40,8,77);
+    background: linear-gradient(90deg, rgba(40,8,77,1) 0%, rgba(82,106,186,1) 49%, rgba(12,79,93,1) 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background: rgba(39, 39, 39, 0.4);
+}
+.nav{
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+    background: linear-gradient(rgba(39,39,39, 0.6), transparent);
+    z-index: 100;
+}
+.nav-logo p{
+    color: white;
+    font-size: 25px;
+    font-weight: 600;
+}
+.nav-menu ul{
+    display: flex;
+}
+.nav-menu ul li{
+    list-style-type: none;
+}
+.nav-menu ul li .link{
+    text-decoration: none;
+    font-weight: 500;
+    color: #fff;
+    padding-bottom: 15px;
+    margin: 0 25px;
+}
+.link:hover, .active{
+    border-bottom: 2px solid #fff;
+}
+/* Ensure consistent size for the question wrapper */
+.questions-wrapper {
+    margin-top: 120px; /* Adjust this value to match the height of your navigation bar */
+    width: 100%; /* Full width of the container */
+    max-width: 600px; /* Set a fixed maximum width for consistency */
+    text-align: center;
+    margin: 120px auto; /* Center the wrapper horizontally */
+    padding: 20px; /* Add padding for spacing */
+    box-sizing: border-box; /* Include padding in the width calculation */
 }
 
-header {
-  background-color: #4CAF50;
-  color: white;
-  padding: 20px;
-  text-align: center;
+/* Ensure consistent size for the question prompts */
+.question-prompts {
+    width: 100%;
+    max-width: 600px; /* Match the width of the wrapper */
+    text-align: center;
+    margin: 0 auto;
+    min-height: 250px; /* Set a minimum height for consistent size */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box; /* Include padding in the height calculation */
 }
 
-header h1 {
-  margin: 0;
-  font-size: 2.5em;
+/* Style for individual question prompts */
+.question-prompt {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    margin-bottom: 20px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    width: 100%; /* Ensure the prompt takes up the full width of the wrapper */
+    min-height: 250px; /* Match the height of the wrapper */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box; /* Include padding in the height calculation */
 }
 
-header p {
-  margin: 10px 0 0;
-  font-size: 1.1em;
+.question-prompt header {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
+    word-wrap: break-word; /* Ensure long words wrap properly */
+}
+.input-field {
+    font-size: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    height: 50px;
+    width: 100%;
+    padding: 0 10px;
+    border: none;
+    border-radius: 30px;
+    outline: none;
+    transition: .2s ease;
+}
+.input-field:hover, .input-field:focus {
+    background: rgba(255, 255, 255, 0.25);
+}
+/* Style for the navigation buttons */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 100%; /* Ensure buttons span the full width of the wrapper */
+    max-width: 600px; /* Match the width of the wrapper */
+    margin: 20px auto; /* Center the buttons horizontally */
+    box-sizing: border-box; /* Include padding in the width calculation */
 }
 
-/* Calculator Container */
-.calculator-container {
-  max-width: 400px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.navigation-buttons .btn {
+    width: 120px; /* Set a fixed width for consistency */
+    height: 40px;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.4);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    text-align: center;
 }
 
-.calculator-container label {
-  display: block;
-  margin-top: 10px;
-  font-weight: bold;
+.navigation-buttons .btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+.summary-section {
+    width: 100%;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    margin: 20px auto;
+    text-align: center;
+    transform: translateY(20px); /* Slide effect */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
+}
+.summary-section.visible {
+    opacity: 1; /* Fully visible */
+    transform: translateY(0); /* Reset slide effect */
+}
+.summary-section .btn {
+    width: auto; /* Allow the button to adjust its width based on the text */
+    height: 40px;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.4);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-top: 20px; /* Add spacing above the button */
+    padding: 10px 20px; /* Add space around the text */
+    text-align: center; /* Center the text inside the button */
+    white-space: nowrap; /* Prevent the text from wrapping */
 }
 
-.calculator-container input,
-.calculator-container select {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.summary-section .btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+.summary-section header {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.summary-section ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+.summary-section ul li {
+    margin-bottom: 10px;
 }
 
-.calculator-container .error {
-  color: red;
-  font-size: 0.9em;
-  margin-top: 5px;
+/* Style for the Submit Button */
+.submitanswers .btn {
+    width: 100px;
+    height: 40px;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.4);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-top: 10px; /* Add spacing above the button */
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
-.calculator-container .invalid {
-  border: 2px solid red;
+.submitanswers .btn:hover {
+    background: rgba(255, 255, 255, 0.3);
 }
 
-.calculator-container button {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  margin-top: 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 1em;
-  cursor: pointer;
-}
-
-.calculator-container button:hover {
-  background-color: #45a049;
-}
-
-/* Results Container */
-.results-container {
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.results-container h2 {
-  margin-top: 0;
-  font-size: 1.8em;
-  color: #4CAF50;
-}
-
-.results-container p {
-  margin: 10px 0;
-}
-
-.results-container ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.results-container ul li {
-  margin: 5px 0;
+/* Add padding to the submit button container */
+.submitanswers {
+    text-align: center;
+    margin-top:20px; /* Add spacing between the summary box and the submit button */
 }
