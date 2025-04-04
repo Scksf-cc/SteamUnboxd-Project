@@ -1,189 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>Insurance Healthcare Risk Calculator</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="test.css">
+    <title>SteamUnboxd | Questions</title>
+    <script defer src="test.js"></script>
 </head>
 <body>
-  <!-- Part 1: Title and Description -->
-  <header>
-    <h1>Insurance Healthcare Risk Calculator</h1>
-    <p>
-      Welcome to the Insurance Healthcare Risk Calculator! Enter your age, height, weight, blood pressure level, and any family diseases to calculate your insurance risk score and category.
-    </p>
-  </header>
+ <div class="wrapper">
+    <nav class="nav">
+        <div class="nav-logo">
+            <p>SteamUnboxd</p>
+        </div>
+        <div class="nav-menu" id="navMenu">
+            <ul>
+                <li><a href="#" class="link active">Home</a></li>
+                <li><a href="#" class="link">About</a></li>
+                <li><a href="#summary" class="link">Questions</a></li>
+            </ul>
+        </div>
+        <div class="nav-menu-btn">
+            <i class="bx bx-menu" onclick="myMenuFunction()"></i>
+        </div>
+    </nav>
 
-  <!-- Part 2: Calculator Form -->
-  <main>
-    <div class="calculator-container">
-      <form id="riskForm">
-        <!-- Age Input -->
-        <label for="age">Age:</label>
-        <input type="number" id="age" name="age" required>
-        <div class="error" id="ageError"></div>
-
-        <!-- Height Input -->
-        <label for="height">Height (in cm):</label>
-        <input type="number" id="height" name="height" required>
-        <div class="error" id="heightError"></div>
-
-        <!-- Weight Input -->
-        <label for="weight">Weight (in kg):</label>
-        <input type="number" id="weight" name="weight" required>
-        <div class="error" id="weightError"></div>
-
-        <!-- Blood Pressure Input -->
-        <label for="bloodPressure">Blood Pressure:</label>
-        <select id="bloodPressure" name="bloodPressure" required>
-          <option value="normal">Normal</option>
-          <option value="elevated">Elevated</option>
-          <option value="stage1">Stage 1</option>
-          <option value="stage2">Stage 2</option>
-          <option value="crisis">Crisis</option>
-        </select>
-        <div class="error" id="bloodPressureError"></div>
-
-        <!-- Family Diseases Input -->
-        <label>Family Diseases (optional):</label>
-        <label><input type="checkbox" name="familyDiseases" value="diabetes"> Diabetes</label>
-        <label><input type="checkbox" name="familyDiseases" value="cancer"> Cancer</label>
-        <label><input type="checkbox" name="familyDiseases" value="alzheimers"> Alzheimer’s</label>
-        <div class="error" id="familyDiseasesError"></div>
-
-        <button type="submit">Calculate Risk</button>
-      </form>
+    <!-- QUESTION FORM -->
+    <div class="questions-wrapper">
+        <div class="question-prompts">
+            <div class="question-prompt" id="prompt1">
+                <header>Question 1</header>
+                <p>What genres do you typically enjoy? (e.g., RPG, FPS, strategy, puzzle, simulation, horror)</p>
+                <input type="text" class="input-field" id="answer1" placeholder="Enter your answer">
+            </div>
+            <div class="question-prompt" id="prompt2" style="display: none;">
+                <header>Question 2</header>
+                <p>Do you prefer single-player, multiplayer, or cooperative experiences?</p>
+                <input type="text" class="input-field" id="answer2" placeholder="Enter your answer">
+            </div>
+            <div class="question-prompt" id="prompt3" style="display: none;">
+                <header>Question 3</header>
+                <p>How important is a strong narrative/story to you in a game?</p>
+                <input type="text" class="input-field" id="answer3" placeholder="Enter your answer">
+            </div>
+            <div class="question-prompt" id="prompt4" style="display: none;">
+                <header>Question 4</header>
+                <p>Do you like games with open-world exploration or more linear, structured levels?</p>
+                <input type="text" class="input-field" id="answer4" placeholder="Enter your answer">
+            </div>
+            <div class="question-prompt" id="prompt5" style="display: none;">
+                <header>Question 5</header>
+                <p>What level of challenge do you prefer? (e.g., casual, moderate, hardcore/roguelike)</p>
+                <input type="text" class="input-field" id="answer5" placeholder="Enter your answer">
+            </div>
+            <div class="question-prompt" id="prompt6" style="display: none;">
+                <header>Question 6</header>
+                <p>Are there any specific art styles or settings you’re drawn to? (e.g., pixel art, realistic, sci-fi, fantasy, post-apocalyptic)</p>
+                <input type="text" class="input-field" id="answer6" placeholder="Enter your answer">
+            </div>
+            <div class="question-prompt" id="prompt7" style="display: none;">
+                <header>Question 7</header>
+                <p>How much time do you usually want to invest in a single gaming session? (Short bursts vs. long immersive sessions)</p>
+                <input type="text" class="input-field" id="answer7" placeholder="Enter your answer">
+            </div>
+            <div class="question-prompt" id="prompt8" style="display: none;">
+                <header>Question 8</header>
+                <p>Do you enjoy games with deep character customization/progression systems?</p>
+                <input type="text" class="input-field" id="answer8" placeholder="Enter your answer">
+            </div>
+            <div class="question-prompt" id="prompt9" style="display: none;">
+                <header>Question 9</header>
+                <p>Are there any game mechanics you particularly love or hate? (e.g., turn-based combat, crafting, stealth, survival elements)</p>
+                <input type="text" class="input-field" id="answer9" placeholder="Enter your answer">
+            </div>
+            <div class="question-prompt" id="prompt10" style="display: none;">
+                <header>Question 10</header>
+                <p>Can you name a few games you’ve loved and a few you didn’t? What made them stand out?</p>
+                <input type="text" class="input-field" id="answer10" placeholder="Enter your answer">
+            </div>
+        </div>
+        <div class="navigation-buttons">
+            <button class="btn" id="prevBtn" onclick="prevQuestion()">Previous</button>
+            <button class="btn" id="nextBtn" onclick="nextQuestion()">Next</button>
+        </div>
     </div>
-  </main>
 
-  <!-- Part 3: Results and Calculations -->
-  <section class="results-container">
-    <h2>Results</h2>
-    <div id="inputValues">
-      <p><strong>Input Values:</strong></p>
-      <ul>
-        <li>Age: <span id="displayAge"></span></li>
-        <li>Height: <span id="displayHeight"></span> cm</li>
-        <li>Weight: <span id="displayWeight"></span> kg</li>
-        <li>Blood Pressure: <span id="displayBloodPressure"></span></li>
-        <li>Family Diseases: <span id="displayFamilyDiseases"></span></li>
-      </ul>
+    <div id="submit" class="submitanswers">
+        <button class="btn" id="submitBtn">Submit Answers</button>
     </div>
-    <div id="calculations">
-      <p><strong>Calculations:</strong></p>
-      <ul>
-        <li>BMI: <span id="displayBMI"></span></li>
-        <li>Age Points: <span id="displayAgePoints"></span></li>
-        <li>BMI Points: <span id="displayBMIPoints"></span></li>
-        <li>Blood Pressure Points: <span id="displayBloodPressurePoints"></span></li>
-        <li>Family Disease Points: <span id="displayFamilyDiseasePoints"></span></li>
-      </ul>
+
+    <!-- SUMMARY SECTION -->
+    <div id="summary" class="summary-section">
+        <header>Summary of Your Answers</header>
+        <ul id="answersList">
+            <!-- Answers will be dynamically populated here -->
+        </ul>
+        <button class="btn" id="whatGameBtn">What Game Should I Play?</button>
     </div>
-    <div id="results">
-      <p><strong>Total Risk Score:</strong> <span id="displayTotalScore"></span></p>
-      <p><strong>Risk Category:</strong> <span id="displayRiskCategory"></span></p>
-    </div>
-  </section>
+</div>   
 
-  <script>
-    // Function to validate input fields
-    function validateInputs() {
-      let isValid = true;
-
-      // Validate Age
-      const age = document.getElementById('age').value;
-      const ageError = document.getElementById('ageError');
-      if (!age || age < 0) {
-        ageError.textContent = 'Please enter a valid age (positive number).';
-        document.getElementById('age').classList.add('invalid');
-        isValid = false;
-      } else {
-        ageError.textContent = '';
-        document.getElementById('age').classList.remove('invalid');
-      }
-
-      // Validate Height
-      const height = document.getElementById('height').value;
-      const heightError = document.getElementById('heightError');
-      if (!height || height <= 60) {
-        heightError.textContent = 'Please enter a valid height (greater than 60 cm).';
-        document.getElementById('height').classList.add('invalid');
-        isValid = false;
-      } else {
-        heightError.textContent = '';
-        document.getElementById('height').classList.remove('invalid');
-      }
-
-      // Validate Weight
-      const weight = document.getElementById('weight').value;
-      const weightError = document.getElementById('weightError');
-      if (!weight || weight < 0) {
-        weightError.textContent = 'Please enter a valid weight (positive number).';
-        document.getElementById('weight').classList.add('invalid');
-        isValid = false;
-      } else {
-        weightError.textContent = '';
-        document.getElementById('weight').classList.remove('invalid');
-      }
-
-      // Validate Blood Pressure
-      const bloodPressure = document.getElementById('bloodPressure').value;
-      const bloodPressureError = document.getElementById('bloodPressureError');
-      if (!bloodPressure) {
-        bloodPressureError.textContent = 'Please select a blood pressure level.';
-        document.getElementById('bloodPressure').classList.add('invalid');
-        isValid = false;
-      } else {
-        bloodPressureError.textContent = '';
-        document.getElementById('bloodPressure').classList.remove('invalid');
-      }
-
-      return isValid;
+<script>
+    function myMenuFunction() {
+        var i = document.getElementById("navMenu");
+        if (i.className === "nav-menu") {
+            i.className += " responsive";
+        } else {
+            i.className = "nav-menu";
+        }
     }
 
-    // Form submission handler
-    document.getElementById('riskForm').addEventListener('submit', async (event) => {
-      event.preventDefault();
+    let currentQuestion = 1;
 
-      if (!validateInputs()) {
-        return; // Stop submission if validation fails
-      }
+    function showQuestion(questionNumber) {
+        const questions = document.querySelectorAll('.question-prompt');
+        questions.forEach((question, index) => {
+            question.style.display = 'none'; // Hide all questions
+            question.style.opacity = '0';   // Set opacity to 0 for all questions
+        });
 
-      const age = document.getElementById('age').value;
-      const height = document.getElementById('height').value;
-      const weight = document.getElementById('weight').value;
-      const bloodPressure = document.getElementById('bloodPressure').value;
-      const familyDiseases = Array.from(document.querySelectorAll('input[name="familyDiseases"]:checked'))
-        .map(checkbox => checkbox.value);
+        const current = document.getElementById(`prompt${questionNumber}`);
+        current.style.display = 'block'; // Show the current question
+        setTimeout(() => {
+            current.style.opacity = '1'; // Fade in the current question
+        }, 100);
+    }
 
-      // Display input values
-      document.getElementById('displayAge').textContent = age;
-      document.getElementById('displayHeight').textContent = height;
-      document.getElementById('displayWeight').textContent = weight;
-      document.getElementById('displayBloodPressure').textContent = bloodPressure;
-      document.getElementById('displayFamilyDiseases').textContent = familyDiseases.join(', ') || 'None';
+    function nextQuestion() {
+        if (currentQuestion < 10) {
+            currentQuestion++;
+            showQuestion(currentQuestion);
+        }
+    }
 
-      // Send data to the API
-      const response = await fetch('/api/message', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ age, height, weight, bloodPressure, familyDiseases }),
-      });
+    function prevQuestion() {
+        if (currentQuestion > 1) {
+            currentQuestion--;
+            showQuestion(currentQuestion);
+        }
+    }
 
-      const result = await response.json();
+    function populateSummary() {
+        const answersList = document.getElementById('answersList');
+        answersList.innerHTML = ''; // Clear previous answers
+        for (let i = 1; i <= 10; i++) {
+            const question = document.querySelector(`#prompt${i} p`).textContent;
+            const answer = document.getElementById(`answer${i}`).value || 'No answer provided';
+            const listItem = document.createElement('li');
+            listItem.textContent = `${question}: ${answer}`;
+            answersList.appendChild(listItem);
+        }
 
-      // Display calculations and results
-      document.getElementById('displayBMI').textContent = result.bmi;
-      document.getElementById('displayAgePoints').textContent = result.agePoints;
-      document.getElementById('displayBMIPoints').textContent = result.bmiPoints;
-      document.getElementById('displayBloodPressurePoints').textContent = result.bloodPressurePoints;
-      document.getElementById('displayFamilyDiseasePoints').textContent = result.familyDiseasePoints;
-      document.getElementById('displayTotalScore').textContent = result.score;
-      document.getElementById('displayRiskCategory').textContent = result.category;
+        // Make the summary section visible
+        const summarySection = document.getElementById('summary');
+        summarySection.classList.add('visible');
+    }
+
+    // Attach the populateSummary function to the "Submit Answers" button
+    document.getElementById('submitBtn').addEventListener('click', populateSummary);
+
+    // Ensure Question 1 is visible on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        showQuestion(currentQuestion);
     });
-  </script>
+</script>
+
 </body>
 </html>
