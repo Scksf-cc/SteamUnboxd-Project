@@ -154,8 +154,16 @@ body {
     color: white;
     margin: 20px auto;
     text-align: center;
-    transform: translateY(20px); /* Slide effect */
+    transform: translateY(0); /* Slide effect */
     transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
+    opacity: 1; /* Make sure it's visible by default */
+    display: block; /* Ensure it's a block element */
+}
+
+.summary-section.hidden {
+    opacity: 0; /* Fully transparent */
+    transform: translateY(20px); /* Slide effect */
+    display: none; /* Hide the element */
 }
 .summary-section.visible {
     opacity: 1; /* Fully visible */
@@ -190,6 +198,17 @@ body {
 }
 .summary-section ul li {
     margin-bottom: 10px;
+    text-align: left; /* Align text to the left */
+}
+
+.summary-section ul li strong {
+    display: block; /* Put the question on its own line */
+    font-weight: bold; /* Make the question bold */
+    margin-bottom: 5px; /* Add a little space between the question and answer */
+}
+
+.summary-section ul li span {
+    display: block; /* Put the answer on its own line */
 }
 
 /* Style for the Submit Button */
@@ -215,4 +234,87 @@ body {
 .submitanswers {
     text-align: center;
     margin-top:20px; /* Add spacing between the summary box and the submit button */
+}
+
+/* Loading animation styles */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's on top */
+}
+
+.loading-spinner {
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 5px solid #fff;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.gemini-response-section {
+    width: 600px; /* Match the widget width */
+    /* height: 300px;  Remove fixed height */
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    margin: 20px auto;
+    text-align: center; /* Center the content */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    /* overflow: hidden;  Remove overflow hidden */
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+}
+
+.gemini-response-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gemini-response-section header {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.gemini-response-section p {
+    font-size: 16px;
+}
+
+.gemini-response-section iframe {
+    padding: 20px;
+}
+
+.gemini-response-section .btn {
+    width: auto;
+    height: 40px;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.4);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-top: 10px; /* Add spacing above the button */
+    padding: 10px 20px; /* Add space around the text */
+    text-align: center; /* Center the text inside the button */
+    white-space: nowrap; /* Prevent the text from wrapping */
+}
+
+.gemini-response-section .btn:hover {
+    background: rgba(255, 255, 255, 0.3);
 }
